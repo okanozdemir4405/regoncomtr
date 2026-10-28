@@ -1,0 +1,152 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   Regon Teknoloji — "Fiş ve Operasyon Masası" Tasarım Sistemi
+   Sıcak kâğıt/krem zemin, mürekkep siyahı metin, turkuaz vurgu.
+   ============================================================ */
+
+@theme {
+  /* ─── Yüzeyler (kâğıt/krem tema) ─── */
+  --color-background:    #F3EFE6;
+  --color-surface-1:     #EDE8DD;
+  --color-surface-2:     #E5DFD3;
+  --color-surface-3:     #D8D2C5;
+  --color-surface-paper: #FAF8F3;
+  --color-surface-black: #100F0D;
+
+  /* ─── Metin (mürekkep) ─── */
+  --color-text-primary:   #1A1612;
+  --color-text-secondary: #5C5650;
+  --color-text-muted:     #9A9590;
+  --color-text-inverse:   #F3EFE6;
+
+  /* ─── Turkuaz Vurgu Sistemi (WCAG AA Uyumlu) ─── */
+  /* accent: parlak turkuaz, dolgu/buton/vurgu için */
+  --color-accent:       #14C9BE;
+  --color-accent-hover: #0FB2A8;
+  /* accent-ink: koyu turkuaz, krem zeminde YAZI ve ikon için (kontrast > 4.5:1) */
+  --color-accent-ink:   #00766F;
+  /* accent-soft: çok açık turkuaz, arka plan şeritleri için */
+  --color-accent-soft:  #E0F7F5;
+
+  /* ─── Kenarlıklar ─── */
+  --color-border:        #C8C2B6;
+  --color-border-strong: #1A1612;
+
+  /* ─── Fontlar ─── */
+  --font-display: var(--font-bricolage), 'Helvetica Neue', system-ui, sans-serif;
+  --font-body:    var(--font-archivo), 'Helvetica Neue', system-ui, sans-serif;
+  --font-mono:    var(--font-jetbrains), 'Courier New', monospace;
+}
+
+/* ─── Reset ─── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  min-height: 100dvh;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+/* Lenis pürüzsüz kaydırma CSS */
+html.lenis, html.lenis-smooth {
+  height: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+body {
+  font-family: var(--font-body);
+  min-height: 100dvh;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Skip link ─── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--color-text-primary);
+  color: var(--color-text-inverse);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip-link:focus { top: 1rem; }
+
+/* ─── Odak (Turkuaz ring) ─── */
+:focus-visible {
+  outline: 2px solid var(--color-accent-ink);
+  outline-offset: 2px;
+}
+
+/* ─── Seçim ─── */
+::selection {
+  background-color: var(--color-accent-soft);
+  color: var(--color-text-primary);
+}
+
+img { max-width: 100%; height: auto; }
+
+/* ─── Termal fiş baskı animasyonu ─── */
+@keyframes receipt-print {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.receipt-line {
+  animation-name: receipt-print;
+  animation-duration: 0.08s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  opacity: 0;
+}
+
+/* ─── Reduced Motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .receipt-line {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-surface-1); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}

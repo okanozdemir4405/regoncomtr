@@ -1,0 +1,6 @@
+// API v1 rotaları — Aşama 3'te eklenerek büyüyecek
+// Bu dosya yer tutucu olarak bırakıldı.
+// Gelecekteki rotalar:
+//   POST /api/v1/feedback
+//   GET  /api/v1/feedback
+//   GET  /api/v1/projects
